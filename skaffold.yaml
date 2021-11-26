@@ -5,10 +5,12 @@ deploy:
     manifests:
       - ./infra/k8s/*
 build:
-  local:
-    push: false
+  # local:
+  #   push: false
+  googleCloudBuild: 
+    projectId: encoded-ensign-333210
   artifacts:
-    - image: toyosi/auth
+    - image: us.gcr.io/encoded-ensign-333210/auth
       context: auth
       docker:
         dockerfile: Dockerfile
