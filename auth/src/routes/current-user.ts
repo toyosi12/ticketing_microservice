@@ -1,6 +1,6 @@
 import express, { Request, Response} from 'express';
 import jwt from 'jsonwebtoken';
-import { currentUser } from '../middlewares/current-user';
+import { currentUser } from '@toyosi-organiza/common';
 const router = express.Router();
 
 router.get('/api/users/currentuser', currentUser, (req: Request, res: Response) => {

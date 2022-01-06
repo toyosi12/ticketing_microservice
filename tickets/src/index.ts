@@ -7,7 +7,7 @@ const start = async () => {
     }
 
     if(!process.env.MONGO_URI){
-        throw new Error('MONGO_URI must be provided');
+        throw new Error('MONGO URI must be provided');
     }
     try{
         await mongoose.connect(process.env.MONGO_URI);

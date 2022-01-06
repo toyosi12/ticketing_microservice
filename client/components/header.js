@@ -18,7 +18,7 @@ export default ({ currentUser }) => {
     return (
         <nav className='navbar navbar-light bg-light'>
             <Link href='/'>
-                <a>Tixer</a>
+                <a>Organiza</a>
             </Link>
 
             <div className='d-clex justify-content-end'>
