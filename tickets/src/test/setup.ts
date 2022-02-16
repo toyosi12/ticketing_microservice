@@ -1,6 +1,12 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
+
+//instead of importing the actual nats-wrapper, use our built fake 
+//nats-wrapper for
+jest.mock('../nats-wrapper');
+
+ 
 let mongo: any;
 beforeAll(async() => {
     process.env.JWT_KEY = 'asdfasdf';
@@ -12,6 +18,8 @@ beforeAll(async() => {
 });
 
 beforeEach(async() => {
+    jest.clearAllMocks();
+    
     //reset all data before running each test
     const collections = await mongoose.connection.db.collections();
 

@@ -1,8 +1,10 @@
 import { NotAuthorizedError, NotFoundError, requireAuth, validateRequest } from '@toyosi-organiza/common';
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
+import { TicketUpdatedPublisher } from '../events/publishers/ticket-updated-publisher';
 
 import { Ticket } from '../models/ticket';
+import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
@@ -31,6 +33,12 @@ router.put('/api/tickets/:id', requireAuth, [
     })
 
     await ticket.save();
+    await new TicketUpdatedPublisher(natsWrapper.client).publish({
+        id: ticket.id,
+        title: ticket.title,
+        price: ticket.price,
+        userId: ticket.userId
+    });
 
     res.send(ticket);
 });
